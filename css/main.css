@@ -1,0 +1,230 @@
+/* 1. Base */ 
+html {
+    /*
+    The background-color usually acts as a fallback if the background-image doesn't load, but since we're using a linear-gradient() it will almost always appear.
+    */
+     background-color: #5f45bb; 
+     background-image: linear-gradient(to bottom right, #180cac, #d054e4); 
+     color: #fff; 
+     font-family: "Quicksand", sans-serif; 
+     font-size: 16px; 
+     /*
+     the line-height and browser-specific font-smoothing declarations make the page more readable;
+     the dimensions and overflow values ensure that the page fills up the whole viewport
+     */
+     -moz-osx-font-smoothing: grayscale; 
+     -webkit-font-smoothing: antialiased; 
+     /*
+    The line-height has a unitless value of 1.5 . It means each line of text will be 1.5 times the element's current font size.
+     */
+     line-height: 1.5; 
+     min-height: 100vh; 
+     min-width: 300px; 
+     /*
+    The overflow-x: hidden declaration prevents the page from scrolling horizontally while preserving the usual vertical scroll.
+     */
+     overflow-x: hidden;
+     text-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+a {
+    /*Using currentColor is prefered because it will pick up the color set by html before: color: #fff . Updating the color of both only requires a single line change*/
+    color: currentColor;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* 2. Shared */ 
+.wallpaper,
+.picture-shadow, 
+.picture-image {
+    display: block;
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+.job,
+.button {
+    font-family: "Montserrat", "Quicksand", sans-serif;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+}
+
+.button,
+.social a {
+    transform-origin: center;
+    transition-duration: 100ms;
+}
+
+/* 3. Specific */
+.wallpaper { 
+    background-image: url("../images/image.png"); 
+    background-position: center; 
+    background-size: cover; 
+    opacity: 0.2; 
+    position: fixed; 
+}
+
+.content { 
+    display: flex;
+    position: relative;
+    min-height: 100vh;
+}
+
+.side {
+    max-height: 20rem;
+    max-width: 20rem;
+}
+
+.about {
+    max-width: 26rem;
+}
+
+.picture {
+    /*
+    The padding-top: 100% is a technique that makes the .picture as high as it is wide making it square at all times;
+
+    */
+    padding-top: 100%;
+    position: relative;
+    width: 100%;
+}
+
+.picture-shadow {
+    border-radius: 290486px;
+    background-image: radial-gradient(#000 0%, rgba(0, 0, 0, 0) 70%);
+    position: absolute;
+    top: 10%;
+}
+
+.picture-image {
+    /*
+    The border-radius is set to the very high value of 120598px to ensure the elements to be rounded. You can use any extremely high value. I personaly use 290486px as a trademark because it's my date of birth.
+    */
+    border-radius: 120598px;
+    position: absolute;
+}
+
+.name {
+    /*
+    The font size uses the rem unit: it's the root value, equal to the font size set on the html element, which we previously set to 16px . So 2.25rem is essentially 36px .
+    */
+    font-size: 2.25rem;
+    line-height: 1.125;
+    margin-bottom: 0.5rem;
+}
+
+.job {
+    color: #ffe479;
+    font-size: 0.75rem;
+}
+
+.hr {
+    background-color: #ff470f;
+    border: none;
+    content: "";
+    height: 1px;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+    /*The transform-origin will be used when we animate the width later on.*/
+    transform-origin: center left;
+    width: 4rem;
+}
+
+.description {
+    font-size: 1.5rem;
+}
+
+.contact {
+    display: inline-block;
+    margin-top: 1.5rem;
+    vertical-align: top;
+}
+
+.button {
+    /* The em unit is equal to the current font size. */
+    background-color: #fff;
+    border-radius: 290486px;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+    color: #9013fe;
+    display: inline-block;
+    font-size: 0.875rem;
+    line-height: 1;
+    padding: 1.25em 2em;
+    text-shadow: none;
+    transition-property: box-shadow, transform;
+    /*
+    we use user-select: none so the text content can't be selected, which can happen when clicking repeatedly on the button;
+    */
+    user-select: none;
+    vertical-align: top;
+    /*to make sure the text never is displayed on two lines, we use white-space: nowrap*/
+    white-space: nowrap;
+    will-change: box-shadow, transform;
+    /*
+    The transition-property and will-change values are for the button states.
+    */
+}
+
+.button:hover {
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.2);
+    transform: scale(1.02) translateY(-4px);
+}
+
+.button:active {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+    transform: scale(0.98) translateY(-2px);
+}
+
+/* 4. Responsiveness */ 
+@media screen and (max-width: 799px) {
+    .content {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 5rem 3rem;
+
+    }.side {
+        margin-bottom: 3rem;
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .content {
+        align-items: center;
+        /*
+        justify-content appears twice because the space-evenly value is not available in all browsers, so we use space-around as a reasonable fallback.
+        */
+        justify-content: space-around;
+        justify-content: space-evenly;
+        padding: 4rem;
+    }
+        
+    .side {
+        /*
+        If there's more horizontal space available, we don't want it to grow, hence the flex-grow: 0;
+        we also don't want it to shrink at all, otherwise, the image would be squased. That's why flex-
+        shrink: 0 is used here too;
+        */
+        flex-grow: 0;
+        flex-shrink: 0;
+        height: 20rem;
+        margin-left: 4rem;
+        /*
+        We also want it to appear after the text content, which is why we use order: 2
+        */
+        order: 2;
+        width: 20rem;
+    }
+    
+    .about {
+        /*
+        we do want it to use the remaining space available, in both directions, which is why flex-grow and flex-shrink have both a value of 1
+        */
+        flex-grow: 1;
+        flex-shrink: 1;
+    }
+}
