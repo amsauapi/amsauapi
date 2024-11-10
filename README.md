@@ -2,7 +2,7 @@
 - 👀 I’m interested in full stack web development
 - 🌱 I’m currently learning front-end web development technologies
 - 💞️ I’m looking to collaborate on front-end projects
-- 📫 How to reach me: facebook.com/amsauapi , Twitter: @amsauapi
+- 📫 How to reach me: facebook.com/amsauapi
 
 <!---
 amsauapi/amsauapi is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
